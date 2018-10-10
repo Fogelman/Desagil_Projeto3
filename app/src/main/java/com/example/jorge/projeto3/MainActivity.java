@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         //num = (EditText)findViewById(R.id.num);
         //msg = (EditText)findViewById(R.id.msg);
-        num = "995966586";
+        num = "991894788";
         msg = "Preciso de ajuda!";
         btnSend = (Button)findViewById(R.id.btnSend);
 
