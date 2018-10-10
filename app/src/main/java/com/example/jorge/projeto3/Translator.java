@@ -2,6 +2,8 @@ package com.example.jorge.projeto3;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Translator {
     // ESTA CLASSE NÃO PODE SER MODIFICADA!
@@ -86,18 +88,78 @@ public class Translator {
 
     // ESTE MÉTODO DEVE SER PREENCHIDO DE ACORDO COM O ENUNCIADO!
     public char morseToChar(String code) {
-        return ' ';
+
+        Node node = root;
+        for (int i =0; i<code.length();i++){
+
+            if (code.charAt(i)=='.'){
+                node = node.getLeftChild();
+            }
+            else if (code.charAt(i)=='_'){
+                node = node.getLeftChild();
+            }
+        }
+
+        return node.getValue();
     }
 
 
     // ESTE MÉTODO DEVE SER PREENCHIDO DE ACORDO COM O ENUNCIADO!
     public String charToMorse(char c) {
-        return null;
+
+
+        String code = "";
+        Node node = this.map.get(c);
+        while(node != root){
+
+            Node oldNode = node;
+            node = node.getParent();
+            if (node.getLeftChild() == oldNode){
+                code = "." +code;
+            }
+
+
+            if (node.getRightChild() == oldNode){
+                code = "_" +code;
+            }
+        }
+        return code;
     }
 
 
     // ESTE MÉTODO DEVE SER PREENCHIDO DE ACORDO COM O ENUNCIADO!
     public LinkedList<String> getCodes() {
-        return null;
+
+        LinkedList<String> codes = new LinkedList<String>();
+        LinkedList<Node> visited = new LinkedList<Node>();
+        LinkedList<Node> queue = new LinkedList<Node>();
+
+        visited.add(root);
+        queue.addLast(root);
+        while (!queue.isEmpty()){
+            Node node = queue.getFirst();
+            Node left = node.getLeftChild();
+            Node right = node.getLeftChild();
+
+            if(left != null && !visited.contains(left)){
+                visited.add(left);
+                queue.addLast(left);
+            }
+            else if(right != null && !visited.contains(right)){
+                visited.add(right);
+                queue.addLast(right);
+            }
+
+            else{
+
+                visited.removeFirst();
+                codes.addLast(String.valueOf(node.getValue()));
+
+            }
+
+
+        }
+
+        return codes;
     }
 }
