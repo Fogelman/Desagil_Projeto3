@@ -9,12 +9,59 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:id="@+id/btnSend"
+        android:id="@+id/btnMorse"
         android:layout_width="149dp"
         android:layout_height="96dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Enviar"
+        android:text=".-"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnSpace"
+        android:layout_width="118dp"
+        android:layout_height="96dp"
+        android:layout_alignTop="@+id/btnMorse"
+        android:layout_toStartOf="@+id/btnMorse"
+        android:text="Space" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnMorse"
+        android:layout_toEndOf="@+id/btnMorse"
+        android:text="Delete" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/btnMorse"
+        android:text="Send" />
+
+    <TextView
+        android:id="@+id/morseView"
+        android:layout_width="224dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        tools:text="Morse" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="227dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="169dp"
+        android:ems="10"
+        android:hint="Mensagem"
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
 </RelativeLayout>

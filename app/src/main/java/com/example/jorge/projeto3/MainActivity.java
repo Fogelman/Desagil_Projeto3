@@ -2,31 +2,32 @@ package com.example.jorge.projeto3;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
     //EditText num, msg;
     String num, msg;
-    Button btnSend;
+    Button btnSend, btnMorse;
+    TextView morseView;
+    EditText editText;
     private int SEND_SMS_PERMISSION_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         num = "991894788";
         msg = "Preciso de ajuda!";
         btnSend = (Button)findViewById(R.id.btnSend);
+        btnMorse = (Button)findViewById(R.id.btnMorse);
+        morseView = (TextView)findViewById(R.id.morseView);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +56,23 @@ public class MainActivity extends AppCompatActivity {
                     requestSmsPermission();
                 }
 
+            }
+        });
+
+        btnMorse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                morseView.append(".");
+            }
+        });
+
+        btnMorse.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                morseView.append("-");
+                return true;
             }
         });
     }
@@ -93,12 +113,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendSms() {
         //String numero = num.getText().toString();
-        //String mensagem = msg.getText().toString();
+        EditText msg = (EditText)findViewById(R.id.editText);
+        String mensagem = msg.getText().toString();
         String numero = num;
-        String mensagem = msg;
 
         SmsManager manager = SmsManager.getDefault();
-        manager.sendTextMessage(numero, null, msg, null, null);
+        manager.sendTextMessage(numero, null, mensagem, null, null);
 
         Toast.makeText(getApplicationContext(), "Mensagem enviada", Toast.LENGTH_LONG).show();
 
