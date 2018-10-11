@@ -55,10 +55,11 @@ public class Translator {
     private Node root;
     private HashMap<Character, Node> map;
 
-
     // ESTE CONSTRUTOR DEVE SER PREENCHIDO DE ACORDO COM O ENUNCIADO!
     public Translator() {
-        String alfa = " ETIANMSURWDKGOHVF L PJBXCYZQ  54 3   2  +    16=/     7   8 90";
+        map = new HashMap<>();
+//        String alfa = " ETIANMSURWDKGOHVF L PJBXCYZQ  54 3   2  +    16=/     7   8 90";
+        String alfa = " etianmsurwdkgohvf l pjbxcyzq  54 3   2       16       7   8 90";
         Node[] nodes = new Node[alfa.length()];
 
         for (int i = 0; i < nodes.length; i++) {
@@ -71,7 +72,7 @@ public class Translator {
 
         for (int i = 0; i < nodes.length; i++) {
 
-            if (nodes[i] == root) {
+            if (nodes[i] != root) {
                 nodes[i].setParent(nodes[(i-1)/2]);
             }
 
@@ -89,14 +90,14 @@ public class Translator {
     // ESTE MÉTODO DEVE SER PREENCHIDO DE ACORDO COM O ENUNCIADO!
     public char morseToChar(String code) {
 
-        Node node = root;
+        Node node = this.root;
         for (int i =0; i<code.length();i++){
 
             if (code.charAt(i)=='.'){
                 node = node.getLeftChild();
             }
-            else if (code.charAt(i)=='_'){
-                node = node.getLeftChild();
+            else if (code.charAt(i)=='-'){
+                node = node.getRightChild();
             }
         }
 
@@ -110,20 +111,28 @@ public class Translator {
 
         String code = "";
         Node node = this.map.get(c);
-        while(node != root){
 
-            Node oldNode = node;
-            node = node.getParent();
-            if (node.getLeftChild() == oldNode){
-                code = "." +code;
+        if (node != null) {
+            while (node != this.root ) {
+
+                Node oldNode = node;
+                node = node.getParent();
+
+                if (node.getLeftChild() == oldNode) {
+                    code = "." + code;
+                } else if (node.getRightChild() == oldNode) {
+                    code = "-" + code;
+
+                }
             }
 
 
-            if (node.getRightChild() == oldNode){
-                code = "_" +code;
-            }
+            return code;
         }
-        return code;
+        else{
+
+            return null;
+        }
     }
 
 
@@ -136,24 +145,29 @@ public class Translator {
 
         visited.add(root);
         queue.addLast(root);
+
         while (!queue.isEmpty()){
             Node node = queue.getFirst();
             Node left = node.getLeftChild();
-            Node right = node.getLeftChild();
+            Node right = node.getRightChild();
 
             if(left != null && !visited.contains(left)){
-                visited.add(left);
+                visited.addLast(left);
                 queue.addLast(left);
             }
             else if(right != null && !visited.contains(right)){
-                visited.add(right);
+                visited.addLast(right);
                 queue.addLast(right);
             }
 
             else{
 
-                visited.removeFirst();
-                codes.addLast(String.valueOf(node.getValue()));
+                queue.removeFirst();
+
+                if (node.getValue() != ' '){
+                    codes.addLast(String.valueOf(charToMorse(node.getValue())));
+                }
+
 
             }
 
