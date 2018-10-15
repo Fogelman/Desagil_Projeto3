@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     //EditText num, msg;
     String num, msg;
-    Button btnSend, btnMorse;
+    Button btnSend, btnMorse, btnSpace, btnDelete;
     TextView morseView;
     EditText editText;
     private int SEND_SMS_PERMISSION_CODE = 1;
@@ -37,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         //num = (EditText)findViewById(R.id.num);
         //msg = (EditText)findViewById(R.id.msg);
-        num = "991894788";
+        num = "995966586";
         msg = "Preciso de ajuda!";
         btnSend = (Button)findViewById(R.id.btnSend);
         btnMorse = (Button)findViewById(R.id.btnMorse);
         morseView = (TextView)findViewById(R.id.morseView);
+        btnSpace = (Button)findViewById(R.id.btnSpace);
+        btnDelete = (Button)findViewById(R.id.btnDelete);
+
+        final EditText editText = (EditText)findViewById(R.id.editText);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +77,25 @@ public class MainActivity extends AppCompatActivity {
 
                 morseView.append("-");
                 return true;
+            }
+        });
+
+        btnSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                editText.append(" ");
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = editText.getText().toString();
+                if (str.length() > 0) {
+                    str = str.substring(0, str.length() - 1);
+                    editText.setText(str);
+                }
             }
         });
     }
@@ -114,8 +137,13 @@ public class MainActivity extends AppCompatActivity {
     private void sendSms() {
         //String numero = num.getText().toString();
         EditText msg = (EditText)findViewById(R.id.editText);
+
         String mensagem = msg.getText().toString();
         String numero = num;
+
+        if (mensagem.length() == 0) {
+            mensagem = "Preciso de ajuda!!";
+        }
 
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(numero, null, mensagem, null, null);
