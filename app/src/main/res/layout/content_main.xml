@@ -11,7 +11,7 @@
     <Button
         android:id="@+id/btnMorse"
         android:layout_width="149dp"
-        android:layout_height="96dp"
+        android:layout_height="144dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text=".-"
@@ -21,7 +21,7 @@
     <Button
         android:id="@+id/btnSpace"
         android:layout_width="118dp"
-        android:layout_height="96dp"
+        android:layout_height="144dp"
         android:layout_alignTop="@+id/btnMorse"
         android:layout_toStartOf="@+id/btnMorse"
         android:text="Space" />
@@ -29,7 +29,7 @@
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="117dp"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_alignTop="@+id/btnMorse"
         android:layout_toEndOf="@+id/btnMorse"
         android:text="Delete" />
@@ -37,7 +37,7 @@
     <Button
         android:id="@+id/btnSend"
         android:layout_width="117dp"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/btnMorse"
         android:text="Send" />
