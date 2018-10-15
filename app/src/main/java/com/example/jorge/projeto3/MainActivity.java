@@ -128,11 +128,8 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 morseView.setText("");
 
-
-
                             }
                              oldMorse = morseView.getText().toString();
-
 
                         }
                     });
@@ -147,11 +144,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     thread.start();
-
-
-
-
-
 
     }
 

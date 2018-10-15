@@ -44,13 +44,14 @@
 
     <TextView
         android:id="@+id/morseView"
-        android:layout_width="224dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="78dp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="36sp"
         tools:text="Morse" />
 
     <EditText
@@ -63,5 +64,6 @@
         android:ems="10"
         android:hint="Mensagem"
         android:inputType="textPersonName"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="18sp" />
 </RelativeLayout>
