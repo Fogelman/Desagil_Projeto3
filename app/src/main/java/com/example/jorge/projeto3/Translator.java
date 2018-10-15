@@ -94,9 +94,16 @@ public class Translator {
         for (int i =0; i<code.length();i++){
 
             if (code.charAt(i)=='.'){
+                if (node.getLeftChild() ==null){
+                    return ' ';
+                }
                 node = node.getLeftChild();
             }
             else if (code.charAt(i)=='-'){
+
+                if (node.getLeftChild() ==null){
+                    return ' ' ;
+                }
                 node = node.getRightChild();
             }
         }

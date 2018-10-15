@@ -1,5 +1,7 @@
 package com.example.jorge.projeto3;
 
+
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     TextView morseView;
     EditText editText;
     private int SEND_SMS_PERMISSION_CODE = 1;
+    private String oldMorse;
+    private Translator translator = new Translator();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,9 +101,58 @@ public class MainActivity extends AppCompatActivity {
                 if (str.length() > 0) {
                     str = str.substring(0, str.length() - 1);
                     editText.setText(str);
+                    editText.setSelection(editText.getText().length());
                 }
             }
         });
+
+
+    Thread thread = new Thread(){
+        @Override
+        public void run (){
+
+           oldMorse = morseView.getText().toString();
+            while(!isInterrupted()){
+                try {
+                    Thread.sleep(750);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String newMorse = morseView.getText().toString();
+                            if (newMorse.length() >0 &&  newMorse.length() == oldMorse.length()){
+
+                                char character = translator.morseToChar(newMorse);
+                                if (character != ' '){
+                                    editText.append(String.valueOf(character));
+
+                                }
+                                morseView.setText("");
+
+
+
+                            }
+                             oldMorse = morseView.getText().toString();
+
+
+                        }
+                    });
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+
+                }
+
+            }
+        }
+    };
+
+    thread.start();
+
+
+
+
+
+
     }
 
     private void requestSmsPermission(){
@@ -139,19 +194,19 @@ public class MainActivity extends AppCompatActivity {
         EditText msg = (EditText)findViewById(R.id.editText);
 
         String mensagem = msg.getText().toString();
+        msg.setText("");
         String numero = num;
 
         if (mensagem.length() == 0) {
             mensagem = "Preciso de ajuda!!";
         }
-
+        Log.w("MensagemEnviada",mensagem);
         SmsManager manager = SmsManager.getDefault();
         manager.sendTextMessage(numero, null, mensagem, null, null);
 
         Toast.makeText(getApplicationContext(), "Mensagem enviada", Toast.LENGTH_LONG).show();
 
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
