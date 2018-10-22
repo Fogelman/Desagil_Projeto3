@@ -4,6 +4,7 @@ package com.example.jorge.projeto3;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     //EditText num, msg;
     String num, msg;
-    Button btnSend, btnMorse, btnSpace, btnDelete,btnUp,btnDown;
+    Button btnSend, btnMorse, btnSpace, btnDelete, btnUp, btnDown, btnDicionario;
     TextView morseView,txtNome,txtNum,txt1,txt2,txt3,txt4,txt5;
     EditText editText;
 
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         numeroList.add("995966586");
         numeroList.add("995966586");
         numeroList.add("972020099");
+
+        btnDicionario = (Button)findViewById(R.id.btnDicionario);
         btnSend = (Button)findViewById(R.id.btnSend);
         btnMorse = (Button)findViewById(R.id.btnMorse);
         morseView = (TextView)findViewById(R.id.morseView);
@@ -84,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
         txtList.add(txt4);
 
         int counter = 0;
+
+        btnDicionario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ListViewLoader.class));
+            }
+        });
 
         btnUp.setOnClickListener(new View.OnClickListener() {
             @Override
