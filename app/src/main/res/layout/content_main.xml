@@ -87,4 +87,12 @@
         android:layout_marginEnd="268dp"
         android:layout_marginBottom="4dp"
         android:text="Down" />
+
+    <Button
+        android:id="@+id/btnDicionario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="Dix" />
 </RelativeLayout>
