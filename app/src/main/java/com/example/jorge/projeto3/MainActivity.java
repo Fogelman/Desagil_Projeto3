@@ -5,6 +5,7 @@ package com.example.jorge.projeto3;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -20,19 +21,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.ArrayList;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     //EditText num, msg;
     String num, msg;
-    Button btnSend, btnMorse, btnSpace, btnDelete;
-    TextView morseView;
+    Button btnSend, btnMorse, btnSpace, btnDelete,btnUp,btnDown;
+    TextView morseView,txtNome,txtNum,txt1,txt2,txt3,txt4,txt5;
     EditText editText;
+
     private int SEND_SMS_PERMISSION_CODE = 1;
     private String oldMorse;
     private Translator translator = new Translator();
+    int count = 0;
+
 
 
     @Override
@@ -45,14 +52,86 @@ public class MainActivity extends AppCompatActivity {
         //msg = (EditText)findViewById(R.id.msg);
         num = "995966586";
         msg = "Preciso de ajuda!";
+        ArrayList<String> nomeList = new ArrayList<String>();
+        final ArrayList<String> numeroList = new ArrayList<String>();
+        nomeList.add("Cuidador");
+        nomeList.add("David");
+        nomeList.add("Bruno");
+        nomeList.add("Gustavo");
+        nomeList.add("Jorge");
+        numeroList.add("995966586");
+        numeroList.add("995966586");
+        numeroList.add("995966586");
+        numeroList.add("972020099");
         btnSend = (Button)findViewById(R.id.btnSend);
         btnMorse = (Button)findViewById(R.id.btnMorse);
         morseView = (TextView)findViewById(R.id.morseView);
         btnSpace = (Button)findViewById(R.id.btnSpace);
         btnDelete = (Button)findViewById(R.id.btnDelete);
-
+        txtNome = (TextView)findViewById(R.id.textView11);
+        txtNum = (TextView)findViewById(R.id.textView10);
+        btnUp = (Button)findViewById(R.id.button);
+        btnDown = (Button)findViewById(R.id.button2);
         final EditText editText = (EditText)findViewById(R.id.editText);
+        txt1 = (TextView) findViewById((R.id.textView13));
+        txt2 = (TextView) findViewById((R.id.textView10));
+        txt3 = (TextView) findViewById((R.id.textView12));
+        txt4 = (TextView) findViewById((R.id.textView11));
+        final ArrayList<TextView> txtList = new ArrayList<TextView>();
+        txtList.add(txt1);
+        txtList.add(txt2);
+        txtList.add(txt3);
+        txtList.add(txt4);
 
+        int counter = 0;
+
+        btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(count <=0 ){
+                    count = 0;
+
+                }
+
+                else {
+                    count -= 1;
+                }
+                for (int z = 0;z<4;z++){
+                    if (z == count){
+                        txtList.get(z).setSelected(true);
+                        txtList.get(z).setBackgroundColor(Color.BLUE);
+                    }
+                    else{
+                        txtList.get(z).setSelected(false);
+                        txtList.get(z).setBackgroundColor(Color.WHITE);
+                    }
+                }
+                num = numeroList.get(count);
+
+            }
+        });
+        btnDown.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if (count>=3){
+                    count = 3;
+                }
+                else{
+                    count +=1;
+                }
+                for (int u = 0;u<4;u++){
+                    if (u == count){
+                        txtList.get(u).setSelected(true);
+                        txtList.get(u).setBackgroundColor(Color.BLUE);
+                    }
+                    else{
+                        txtList.get(u).setSelected(false);
+                        txtList.get(u).setBackgroundColor(Color.WHITE);
+                    }
+                }
+                num = numeroList.get(count);
+            }
+        });
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

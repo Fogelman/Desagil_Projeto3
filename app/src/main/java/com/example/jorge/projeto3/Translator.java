@@ -13,6 +13,7 @@ public class Translator {
         private Node leftChild;
         private Node rightChild;
 
+
         public Node() {
             this.value = ' ';
             this.parent = null;

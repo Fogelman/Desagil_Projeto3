@@ -20,9 +20,10 @@
 
     <Button
         android:id="@+id/btnSpace"
-        android:layout_width="118dp"
-        android:layout_height="144dp"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/btnMorse"
+        android:layout_marginEnd="3dp"
         android:layout_toStartOf="@+id/btnMorse"
         android:text="Space" />
 
@@ -66,4 +67,24 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="44dp"
+        android:layout_height="94dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="336dp"
+        android:layout_marginBottom="2dp"
+        android:text="UP" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="65dp"
+        android:layout_height="93dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="268dp"
+        android:layout_marginBottom="4dp"
+        android:text="Down" />
 </RelativeLayout>
